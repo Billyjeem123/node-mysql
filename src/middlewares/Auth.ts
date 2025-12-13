@@ -1,4 +1,5 @@
 import  * as jwt from 'jsonwebtoken';
+import { verifyToken } from '../utility/jwt';
 
 export const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers['authorization'] || req.headers['Authorization'];
@@ -11,7 +12,7 @@ export const authenticateJWT = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = verifyToken(token);
     req.user = decoded; 
     next();
   } catch (err) {
