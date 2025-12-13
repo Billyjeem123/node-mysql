@@ -2,6 +2,7 @@
 import { PrismaClient } from '../generated/prisma';
 import bcrypt from 'bcryptjs';
 import { UserResource } from '../resource/UserResource';
+import { signToken } from '../utility/jwt';
 
 const prisma = new PrismaClient();
 
@@ -45,7 +46,11 @@ export class UserService {
     return { success: false, message: 'Invalid credentials', data: null, status_code: 401 };
   }
 
-  return { success: true, message: 'Login successful', data: UserResource.toJson(user), status_code: 200 };
+    const token = signToken({ id: user.id, email: user.email });
+  return { success: true, message: 'Login successful', data: {
+    user: UserResource.toJson(user),
+    token
+  }, status_code: 200 };
 }
 
 }
