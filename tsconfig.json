@@ -1,0 +1,36 @@
+// tsconfig.json is a configuration file that tells TypeScript how to compile your code.
+//This config tells TypeScript:
+
+// “Take all my TypeScript files from src/, compile them into ES6 JavaScript using CommonJS modules,
+//  save the result in dist/, and don’t include any files from node_modules/.”
+{
+  "compilerOptions": {
+    "target": "es6",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": false,
+    "declaration": true,
+    "lib": [
+      "es2017.object",
+      "es2015",
+      "es2017",
+      "dom"
+    ]
+  },
+  "files": [
+    "./node_modules/@types/node/index.d.ts",
+    "types.d.ts"
+  ],
+  "typeRoots": ["./node_modules/@types", "./types"],
+  "include": [
+    "src/**/*.ts",
+    "package.json",
+    "types",
+    "types.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+  
