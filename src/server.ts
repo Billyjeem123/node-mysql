@@ -1,8 +1,6 @@
 import  express from 'express'
-import pool from './config/db'
-import  UserRoutes from "./routes/users.routes";
-import * as bodyParser from 'body-parser'
-import * as cors from 'cors'
+import  UserRoutes from "./routes/userRoutes";
+import PostRoutes  from './routes/postRoute';
 export class Server {
     public app = express()
 
@@ -21,6 +19,7 @@ export class Server {
 
     setRoutes() {
         this.app.use('/api/users', UserRoutes)
+        this.app.use('/api/posts', PostRoutes)
     }
 
     configureBodyParser() {

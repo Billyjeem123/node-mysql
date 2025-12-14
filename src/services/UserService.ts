@@ -46,7 +46,7 @@ export class UserService {
     return { success: false, message: 'Invalid credentials', data: null, status_code: 401 };
   }
 
-    const token = signToken({ id: user.id, email: user.email });
+    const token = signToken({ user_id: user.id, email: user.email });
   return { success: true, message: 'Login successful', data: {
     user: UserResource.toJson(user),
     token
