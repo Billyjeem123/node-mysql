@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { PostController } from '../controllers/PostController';
-import { PostRequest } from '../request/PostRequest';
+import { PostController } from '../controllers/ProductController';
+import { ProductRequest } from '../request/ProductRequest';
 import { authenticateJWT } from '../middlewares/Auth';
-export class PostRoutes {
+export class ProductRoutes {
     public router: Router;
 
     constructor() {
@@ -13,12 +13,12 @@ export class PostRoutes {
     getRoutes() {
         this.router.post(
             '/create',
-             PostRequest,
+             ProductRequest,
             authenticateJWT,
             PostController.create.bind(PostController) 
         );
 
-        this.router.post(
+        this.router.get(
             '/all',
             authenticateJWT,
             PostController.getUserPosts.bind(PostController) 
@@ -28,4 +28,4 @@ export class PostRoutes {
     }
 }
 
-export default new PostRoutes().router;
+export default new ProductRoutes().router;

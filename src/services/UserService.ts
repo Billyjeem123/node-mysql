@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export class UserService {
 
-  static async processUserRegistration(data: { name: string; email: string; password: string }) {
+  static async processUserRegistration(data: { first_name: string; last_name: string; email: string; password: string }) {
     return prisma.$transaction(async () => {
       const existingUser = await prisma.user.findUnique({ where: { email: data.email } });
       if (existingUser) {
@@ -22,7 +22,7 @@ export class UserService {
 
       const hashedPassword = await bcrypt.hash(data.password, 10);
       const user = await prisma.user.create({
-        data: { name: data.name, email: data.email, password: hashedPassword },
+        data: { first_name: data.first_name,  last_name: data.last_name, email: data.email, password: hashedPassword },
       });
 
       return {

@@ -11,6 +11,8 @@ All models should be inside schems.prisma
 
 To  create table migrations
 npx prisma migrate dev --name add_time_stamp_to_posts
+npx prisma migrate dev --name create_posts_table
+
 
 
 next is npx prisma generate

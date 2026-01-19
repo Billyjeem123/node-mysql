@@ -1,6 +1,6 @@
 import  express from 'express'
 import  UserRoutes from "./routes/userRoutes";
-import PostRoutes  from './routes/postRoute';
+import ProductRoutes  from './routes/productRoute';
 export class Server {
     public app = express()
 
@@ -19,7 +19,7 @@ export class Server {
 
     setRoutes() {
         this.app.use('/api/users', UserRoutes)
-        this.app.use('/api/posts', PostRoutes)
+        this.app.use('/api/product', ProductRoutes)
     }
 
     configureBodyParser() {

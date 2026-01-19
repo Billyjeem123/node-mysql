@@ -37,5 +37,39 @@ export function handleValidationErrors(req: Request, res: Response): boolean {
     message,
     data,
   });
-
 }
+  
+export async function paginate(
+  model: any,               
+  page: number = 1,
+  perPage: number = 10,
+  where: object = {},
+  include?: object          // Optional relationships
+) {
+  const total = await model.count({ where });       // Total items
+  const offset = (page - 1) * perPage;
+
+  const data = await model.findMany({
+    where,
+    skip: offset,
+    take: perPage,
+    orderBy: { createdAt: "desc" },
+    include,                                       // Include relationships if provided
+  });
+
+  return {
+    data,
+    pagination: {
+      total,
+      per_page: perPage,
+      current_page: page,
+      last_page: Math.ceil(total / perPage),
+      from: offset + 1,
+      to: offset + data.length,
+    },
+  };
+}
+
+
+
+
